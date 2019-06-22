@@ -1,6 +1,6 @@
 $(function () {
     var all_data;
-    $.get("http://23.98.39.109/api/test").done(function(data) {
+    $.get("/api/test").done(function(data) {
         all_data = data;
 
         // create table
