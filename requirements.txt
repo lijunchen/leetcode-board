@@ -1,0 +1,6 @@
+Flask
+gevent
+lxml
+requests
+pymongo
+flask-cors

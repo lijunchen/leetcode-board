@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Latest</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<p>Today</p>
+<table>
+   <tr>
+    <th>username</th>
+    <th>submissions</th>
+    <th>total solved</th>
+   </tr>
+   {% for item in d %}
+   <tr>
+    <td>{{item[0]}}</td>
+    <td>{{item[1]}}</td>
+    <td>{{item[2]}}</td>
+   </tr>{% endfor %}
+</table>
+</body>
+</html>
