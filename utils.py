@@ -3,8 +3,8 @@ import time
 
 
 def get_today_datetime(timezone=8):
-    now = dt.datetime.utcnow()
-    today = dt.datetime(year=now.year, month=now.month, day=now.day) + dt.timedelta(hours=timezone)
+    now = dt.datetime.utcnow() + dt.timedelta(hours=timezone)
+    today = dt.datetime(year=now.year, month=now.month, day=now.day)
     return today
 
 
