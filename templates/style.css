@@ -1,0 +1,44 @@
+.container {
+	min-height: 600px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.avatar {
+	margin: 10px 5px;
+}
+
+td {
+	position: relative;
+}
+.avatar:after {
+	z-index: 10;
+    content: attr(data-poptext);
+    background: rgba(0, 0, 0, 1);
+    opacity: 0;
+    top: 0;
+    left: 0;
+    color: #fff;
+    position: absolute;
+    transition: 500ms ease;
+    white-space: nowrap;
+}
+  
+.avatar:hover:after {
+    opacity: 0.8;
+    top: -2em;
+    left: -2em;
+    max-height: 200px;
+    padding: 6px;
+}
+
+img {
+	height: 64px;
+	width: 64px;
+	border-radius: 16px;
+}
+
+#oneday_stat_chart {
+	margin-left: 50px;
+}
