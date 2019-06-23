@@ -93,6 +93,8 @@ def test():
         today_solved_pairs.sort(key=lambda p: (p[1], p[0]))
         winner, winner_solved = today_solved_pairs[-1]
         # print(winner, winner_solved)
+        if date == START:
+            winner_solved = 0
         day_info["winner"] = {
             "username": winner,
             "sub": user_submission[winner],
