@@ -85,19 +85,18 @@ def test():
         user_solved = {}
         user_today_solved = {}
         user_submission = {}
+        user_today_submission = {}
         for user in users:
             user_submission[user], user_solved[user] = get_sub_and_sol_of_day(Record, user, date)
+            user_today_submission[user] = user_submission[user] - get_sub_and_sol_of_day(Record, user, date + datetime.timedelta(days=-1))[0]
             user_today_solved[user] = user_solved[user] - get_sub_and_sol_of_day(Record, user, date + datetime.timedelta(days=-1))[1]
-            user_today_solved[user] = abs(user_today_solved[user])
         today_solved_pairs = list(user_today_solved.items())
         today_solved_pairs.sort(key=lambda p: (p[1], p[0]))
         winner, winner_solved = today_solved_pairs[-1]
         # print(winner, winner_solved)
-        if date == START:
-            winner_solved = 0
         day_info["winner"] = {
             "username": winner,
-            "sub": user_submission[winner],
+            "sub": user_today_submission[winner],
             "solved": winner_solved
         }
         if "crawler_time" not in resp:
@@ -107,10 +106,8 @@ def test():
         solved = []
         for user in User.find({}):
             username = user["username"]
-            sub.append(user_submission[username])
+            sub.append(user_today_submission[username])
             solved.append(user_today_solved[username])
-        if date == START:
-            solved = [0] * len(solved)
         day_info["all_users"] = {
             "sub": sub,
             "solved": solved
