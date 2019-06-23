@@ -41,7 +41,11 @@ $(function () {
             xAxis : [
                 {
                     type : "category",
-                    data : all_data["username_arr"]
+                    data : all_data["username_arr"],
+                    axisLabel: {
+                        interval: 0,
+                        rotate: 20
+                    }
                 }
             ],
             yAxis : [
