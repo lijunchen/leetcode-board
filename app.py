@@ -65,8 +65,8 @@ def test():
     Record = client["lcboard"]["Record"]
     User = client["lcboard"]["User"]
     Config = client["lcboard"]["Config"]
-    # START = Config.find_one({"id": 0})["start"]
-    START = datetime.datetime(2019, 6, 1)
+    START = Config.find_one({"id": 0})["start"]
+    # START = datetime.datetime(2019, 6, 1)
     users = {}
     data = []
     username_arr = []
@@ -104,6 +104,8 @@ def test():
             username = user["username"]
             sub.append(user_submission[username])
             solved.append(user_today_solved[username])
+        if date == START:
+            solved = [0] * len(solved)
         day_info["all_users"] = {
             "sub": sub,
             "solved": solved

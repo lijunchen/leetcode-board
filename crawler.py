@@ -1,7 +1,8 @@
 import json
 from lxml import html
 import requests
-from utils import get_today_unixtime, get_today_datetime
+from utils import get_today_unixtime, get_today_datetime, get_now_datatime
+from utils import get_today_eight_oclock_datetime, get_today_eight_oclock_unixtime
 from pymongo import MongoClient
 
 
@@ -19,7 +20,8 @@ def get_user_submissions(username: str, location: str) -> int:
     if pairs:
         lastday = int(pairs[-1][0])
         submissions = int(pairs[-1][1])
-        today = get_today_unixtime(timezone=8)
+        today = get_today_eight_oclock_unixtime(timezone=8)
+        print(today, lastday)
         if today == lastday:
             return submissions
     return 0
@@ -31,7 +33,7 @@ def get_user_total_solved_us(username: str) -> int:
     root = html.fromstring(r.content)
     try:
         solved = root.xpath('//*[@id="base_content"]/div/div/div[1]/div[3]/ul/li[1]/span')[0].text.strip()
-        return solved.replace(' ', '').split("/")[0]
+        return int(solved.replace(' ', '').split("/")[0])
     except IndexError as e:
         pass
     return 0
@@ -87,8 +89,10 @@ def main():
     for user in users:
         submissions = get_user_submissions(user["username"], user["location"])
         solved = get_user_solved(user["username"], user["location"])
-        Record.insert({"username": user["username"], "submission": submissions, "solved": solved,
-                       "date": get_today_datetime(timezone=8)})
+        r = {"username": user["username"], "submission": submissions, "solved": solved,
+                       "date": get_now_datatime(timezone=8)}
+        print(r)
+        Record.insert(r)
 
 
 if __name__ == "__main__":

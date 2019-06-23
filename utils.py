@@ -8,6 +8,14 @@ def get_today_datetime(timezone=8):
     return today
 
 
+def get_today_eight_oclock_datetime(timezone=8):
+    return get_today_datetime(timezone=timezone) + dt.timedelta(hours=8)
+
+
+def get_today_eight_oclock_unixtime(timezone=8):
+    t = get_today_datetime(timezone=timezone) + dt.timedelta(hours=8)
+    return int(time.mktime(t.timetuple()))
+
 def get_today_unixtime(timezone=8):
     return int(time.mktime(get_today_datetime(timezone).timetuple()))
 
