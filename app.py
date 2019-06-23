@@ -100,6 +100,9 @@ def test():
             "sub": user_submission[winner],
             "solved": winner_solved
         }
+        if "crawler_time" not in resp:
+            ct = Record.find({"username": winner}).sort("date", -1).limit(1)[0]["date"]
+            resp["crawler_time"] = ct.isoformat()
         sub = []
         solved = []
         for user in User.find({}):

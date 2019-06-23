@@ -2,7 +2,6 @@ $(function () {
     var all_data;
     $.get("/api/test").done(function(data) {
         all_data = data;
-
         // create table
         html = "<tr>";
         daily_data = all_data["data"]
@@ -20,7 +19,7 @@ $(function () {
         }
         html += "</tr>"
         $("table > tbody").append(html)
-
+        $('body').append('<p>Fetch time: ' + all_data["crawler_time"] + '</p>')
         // echarts part
         var option = {
             tooltip : {
