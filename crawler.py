@@ -4,6 +4,7 @@ import requests
 from utils import get_today_unixtime, get_today_datetime, get_now_datatime
 from utils import get_today_eight_oclock_datetime, get_today_eight_oclock_unixtime
 from pymongo import MongoClient
+import time
 
 
 def get_user_submissions_us(username: str) -> int:
@@ -126,6 +127,7 @@ def main():
                        "date": get_now_datatime(timezone=8)}
         print(r)
         Record.insert(r)
+        time.sleep(1)
 
 
 if __name__ == "__main__":
