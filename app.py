@@ -72,7 +72,7 @@ def test():
     username_arr = []
     resp = {"users": users, "data": data, "username_arr": username_arr}
     for user in User.find({}):
-        username_arr.append(user["username"])
+        username_arr.append(user["alias"])
         users[user["username"]] = {
             "avatar": user["avatar"],
         }
